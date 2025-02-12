@@ -17,6 +17,7 @@
       return acc+x.amount
     },0)
   })
+ 
 
   const moneyIn = computed(()=>{
     return transactions.value
@@ -33,6 +34,15 @@
       return acc+x.amount
     },0)
   })
+
+
+  const handleTransaction = (transactionData) => {
+    transactions.value.push({
+      text: transactionData.text,
+      amount: transactionData.amount,
+    })
+  }
+
 </script>
 
 <template>
@@ -40,7 +50,7 @@
   <div class="container">
     <Balance :total="sum"></Balance>
     <IncomeExpenses :income="moneyIn" :expense="moneyOut"></IncomeExpenses>
-    <AddTransaction></AddTransaction>
+    <AddTransaction @transactionSubmitted="handleTransaction"></AddTransaction>
   </div>
 
 </template>
